@@ -69,6 +69,10 @@ else()
     OpenCV.h
     MangerClass.cpp
     MangerClass.h
+    Yolov5.cpp
+    Yolov5.h
+    CommonAPI.cpp
+    CommonAPI.h
   )
 endif()
 

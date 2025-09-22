@@ -17,6 +17,12 @@ public:
     virtual void showImage(QImage &img) = 0;
 };
 
+class Inference
+{
+public:
+    virtual void imageHandleInference(cv::Mat &image) = 0;
+};
+
 
 class VideoDecode:public QObject
 {
@@ -39,6 +45,12 @@ public:
     ~VideoDecode() = default;
     bool isVideoExist = false;
     QString VideoPath;
+
+      Inference *imageInfer = nullptr;
+      void setImageModelInfer(Inference* infer)
+      {
+          imageInfer = infer;
+      }
 signals:
     // 信号：发送视频帧给主线程（参数为处理后的视频帧）
     void frameReady(const cv::Mat& frame); // cv::Mat 可直接作为信号参数（Qt 支持）

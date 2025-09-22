@@ -10,13 +10,6 @@ OpenCV::OpenCV(const QString &path): VideoDecode(path)
     connect(this, &OpenCV::openVideoInThread, this, &OpenCV::onOpenVideo,
             Qt::QueuedConnection);
 
-
-
-
-
-     qDebug() << "opencv init";
-      qDebug() << "OpenCV init (主线程ID:" << QThread::currentThreadId() << ")";
-
      m_workerThread->start();
 }
 
@@ -96,26 +89,23 @@ void OpenCV::onOpenVideo(const QString &path)
           std::cout << "总帧数: " << total_frames << std::endl;
 
           cv::Mat frame; // 存储每一帧的图像
-          m_cap >> frame; // 读取一帧
-          QImage  image;
+          m_cap >> frame; // 读取一
+
           while (!frame.empty())
           {
-
+              imageInfer->imageHandleInference(frame);
 
               // call the GPU handling the image
               emit frameReady(frame);
               double fps = m_cap.get(cv::CAP_PROP_FPS);
               int delay = static_cast<int>(1000 / fps);
-
-               QThread::msleep(delay); // 毫秒级延时（1.5秒）
-
-               m_cap >> frame;
+              QThread::msleep(50); // 毫秒级延时（1.5秒）
+              m_cap >> frame;
            }
 
     }else
     {
         m_isOpend = false;
-//        emit videoOpenResult(false, "无法打开视频文件: " + path); // 发送失败信号
         qDebug() << "视频打开失败，路径:" << path;
     }
 }

@@ -4,6 +4,7 @@
 #include <QObject>
 #include "QDeployUi.h"
 #include "OpenCV.h"
+#include "Yolov5.h"
 
 class MangerClass : public QObject
 {
@@ -11,12 +12,14 @@ class MangerClass : public QObject
 public:
     explicit MangerClass(QObject *parent = nullptr);
     void show();
+    ~MangerClass();
 signals:
 
 
 private:
     QDeployUi m_ui;
     VideoDecode *opencv = nullptr;
+    Inference *infer = nullptr;
 };
 
 #endif // MANGERCLASS_H

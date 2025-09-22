@@ -19,6 +19,10 @@ public:
     ~OpenCV();
 
     void startOpenVideo();
+//    void setImageModelInfer(Inference* infer)
+//    {
+//        imageInfer = infer;
+//    }
 
 
 signals:
@@ -33,6 +37,7 @@ private:
     bool m_isOpend = false;
     QThread *m_workerThread = nullptr;
     void cvMatToQImage(const cv::Mat &mat, QImage &qimg);
+//    Inference *imageInfer = nullptr;
 
 };
 
