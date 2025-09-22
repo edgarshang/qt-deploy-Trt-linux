@@ -18,5 +18,6 @@ void MangerClass::show()
 
 MangerClass::~MangerClass()
 {
-
+//    delete opencv;
+//    delete infer;
 }

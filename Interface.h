@@ -21,6 +21,7 @@ class Inference
 {
 public:
     virtual void imageHandleInference(cv::Mat &image) = 0;
+    ~Inference() = default;
 };
 
 

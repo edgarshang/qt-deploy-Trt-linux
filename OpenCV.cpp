@@ -28,14 +28,15 @@ void OpenCV::DecodeImage()
 //    Q_UNUSED
     qDebug() << "DecodeImage";
     qDebug() << "DecodeImage 线程ID: " << QThread::currentThreadId();
-    startOpenVideo();
+    emit openVideoInThread(VideoPath);
+//    startOpenVideo();
 //    start();
 }
 
 void OpenCV::startOpenVideo()
 {
     qDebug() << "开始异步打开视频 子线程ID: " << QThread::currentThreadId();
-    emit openVideoInThread(VideoPath);
+
 }
 
 // 转换函数：通过引用传参，直接修改qimg
@@ -99,7 +100,7 @@ void OpenCV::onOpenVideo(const QString &path)
               emit frameReady(frame);
               double fps = m_cap.get(cv::CAP_PROP_FPS);
               int delay = static_cast<int>(1000 / fps);
-              QThread::msleep(50); // 毫秒级延时（1.5秒）
+              QThread::msleep(delay); // 毫秒级延时（1.5秒）
               m_cap >> frame;
            }
 
